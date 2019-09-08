@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="robot-comm" />
+        <module name="robot-service" />
+        <module name="robot-start" />
+        <module name="robot-util" />
+        <module name="robot-web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ass-robot" target="1.8" />
+      <module name="robot-comm" target="1.8" />
+      <module name="robot-service" target="1.8" />
+      <module name="robot-start" target="1.8" />
+      <module name="robot-util" target="1.8" />
+      <module name="robot-web" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="robot-comm" options="-parameters" />
+      <module name="robot-service" options="-parameters" />
+      <module name="robot-start" options="-parameters" />
+      <module name="robot-util" options="-parameters" />
+      <module name="robot-web" options="-parameters" />
+    </option>
+  </component>
+</project>
