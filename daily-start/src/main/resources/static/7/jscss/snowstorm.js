@@ -1,7 +1,7 @@
 /** @license
  * DHTML Snowstorm! JavaScript-based Snow for web pages
  * --------------------------------------------------------
- * Version 1.0.0
+ * Version loveTree.0.0
  * Copyright (c) 2012, Mike_TDX. All rights reserved.
  */
 
@@ -321,7 +321,7 @@ var snowStorm = (function(window, document) {
         }
       } else {
         if (storm.useMeltEffect && s.active && s.type < 3 && !s.melting && Math.random()>0.998) {
-          // ~1/1000 chance of melting mid-air, with each frame
+          // ~loveTree/1000 chance of melting mid-air, with each frame
           s.melting = true;
           s.melt();
           // only incrementally melt one frame

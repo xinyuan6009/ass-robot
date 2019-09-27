@@ -4,11 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<packaging>pom</packaging>
 	<modules>
-		<module>robot-start</module>
-		<module>robot-service</module>
-        <module>robot-web</module>
-		<module>robot-comm</module>
-		<module>robot-util</module>
+		<module>daily-start</module>
+		<module>daily-service</module>
+        <module>daily-web</module>
+		<module>daily-comm</module>
+		<module>daily-util</module>
+		<module>daily-dao</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -16,10 +17,10 @@
 		<version>2.1.8.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.xinyuan.assist</groupId>
-	<artifactId>ass-robot</artifactId>
+	<groupId>com.xinyuan.daily</groupId>
+	<artifactId>daily-notes</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ass-robot</name>
+	<name>daily-notes</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -39,15 +40,34 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>com.xinyuan.assist</groupId>
-				<artifactId>robot-service</artifactId>
+				<groupId>com.xinyuan.daily</groupId>
+				<artifactId>daily-service</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
 			</dependency>
 
 			<dependency>
-				<groupId>com.xinyuan.assist</groupId>
-				<artifactId>robot-web</artifactId>
+				<groupId>com.xinyuan.daily</groupId>
+				<artifactId>daily-web</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/quartz/quartz -->
+			<dependency>
+				<groupId>quartz</groupId>
+				<artifactId>quartz</artifactId>
+				<version>1.5.2</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.mapdb</groupId>
+				<artifactId>mapdb</artifactId>
+				<version>3.0.7</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>1.7.28</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

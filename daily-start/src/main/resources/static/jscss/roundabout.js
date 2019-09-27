@@ -1,5 +1,5 @@
 /**
- * jQuery Roundabout - v1.1
+ * jQuery Roundabout - v1.loveTree
  * http://fredhq.com/projects/roundabout/
  *
  * Moves list-items of enabled ordered and unordered lists long

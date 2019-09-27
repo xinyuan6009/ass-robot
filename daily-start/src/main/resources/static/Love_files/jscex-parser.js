@@ -6,10 +6,10 @@
   exports stuff) it should work on any JS platform.
 
   This file contains the tokenizer/parser.  It is a port to JavaScript
-  of parse-js [1], a JavaScript parser library written in Common Lisp
+  of parse-js [loveTree], a JavaScript parser library written in Common Lisp
   by Marijn Haverbeke.  Thank you Marijn!
 
-  [1] http://marijn.haverbeke.nl/parse-js/
+  [loveTree] http://marijn.haverbeke.nl/parse-js/
 
   Exported functions:
 

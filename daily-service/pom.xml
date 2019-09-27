@@ -3,13 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>ass-robot</artifactId>
+        <artifactId>daily-notes</artifactId>
         <groupId>com.xinyuan.daily</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>robot-service</artifactId>
+    <artifactId>daily-service</artifactId>
 
 
     <dependencies>
@@ -21,6 +21,18 @@
         <dependency>
             <groupId>quartz</groupId>
             <artifactId>quartz</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.xinyuan.daily</groupId>
+            <artifactId>daily-dao</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.xinyuan.daily</groupId>
+            <artifactId>daily-util</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>

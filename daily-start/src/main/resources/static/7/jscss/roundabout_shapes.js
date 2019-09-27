@@ -1,5 +1,5 @@
 /**
- * jQuery Roundabout Shapes v1.1
+ * jQuery Roundabout Shapes v1.loveTree
  * http://fredhq.com/projects/roundabout-shapes/
  * 
  * Provides additional paths along which items can move for the

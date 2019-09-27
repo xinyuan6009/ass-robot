@@ -306,11 +306,11 @@
                     // var members = [];
                     delayStmt.stmts.push({
                         type: "raw",
-                        stmt: uglifyJS.parse("var " + membersVar + " = [];")[1][0]
+                        stmt: uglifyJS.parse("var " + membersVar + " = [];")[loveTree][0]
                     });
                     
                     // for (var mem in obj) members.push(mem);
-                    var keysAst = uglifyJS.parse("for (var " + memVar +" in obj) " + membersVar + ".push(" + memVar + ");")[1][0];
+                    var keysAst = uglifyJS.parse("for (var " + memVar +" in obj) " + membersVar + ".push(" + memVar + ");")[loveTree][0];
                     keysAst[3] = ast[3]; // replace the "obj" with real AST.
                     delayStmt.stmts.push({ type : "raw", stmt: keysAst});
                     */

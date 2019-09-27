@@ -75,7 +75,7 @@ $(function(){
 		$("#on").css({"display":"inline-block"},300);
 	});
 	var sharetext = $("#text-75").text()+"祝❤福"+$("#text-76").text()+$("#text-77").text();
-	sharedesc = $("#text-1").text()+$("#text-2").text()+$("#text-3").text()+$("#text-4").text()+$("#text-5").text()+$("#text-6").text()+$("#text-7").text()+$("#text-8").text()+"......",
+	sharedesc = $("#text-loveTree").text()+$("#text-2").text()+$("#text-3").text()+$("#text-4").text()+$("#text-5").text()+$("#text-6").text()+$("#text-7").text()+$("#text-8").text()+"......",
 	shareurl = $("#write-url u").eq(0).text();
 	window._bd_share_config = {
 		"common": {
