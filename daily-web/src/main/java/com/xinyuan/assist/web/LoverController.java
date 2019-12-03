@@ -15,6 +15,13 @@ public class LoverController {
     @Autowired
     private VisiterService visiterService;
 
+    @RequestMapping("/love/main")
+    public String loveIdx(HttpServletRequest request) {
+        String ip = IPUtil.getIp(request);
+        visiterService.visitCtLog("main", ip);
+        return "/loveIndx.html";
+    }
+
     @RequestMapping("/love")
     public String sayLove(HttpServletRequest request, String flag) {
         String ip = IPUtil.getIp(request);

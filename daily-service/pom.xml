@@ -26,13 +26,11 @@
         <dependency>
             <groupId>com.xinyuan.daily</groupId>
             <artifactId>daily-dao</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.xinyuan.daily</groupId>
             <artifactId>daily-util</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>

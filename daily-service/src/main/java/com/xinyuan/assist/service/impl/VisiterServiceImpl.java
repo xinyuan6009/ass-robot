@@ -2,6 +2,7 @@ package com.xinyuan.assist.service.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -49,15 +50,22 @@ public class VisiterServiceImpl implements VisiterService {
                 visitDOs.put(ip, visitDOArr);
                 return DBHelper.saveKV(visitCTKey, visitDOs);
             }
-            VisitDO visitDO =
-                visitDOArr.stream().filter(v -> v.getPageFlag().equals(flag)).findFirst().orElse(null);
-            if (visitDO == null) {
-                visitDO = buildVisitDO(flag, ip);
-                visitDOArr.add(visitDO);
-                return DBHelper.saveKV(visitCTKey, visitDOs);
+            Iterator<VisitDO> it = visitDOArr.iterator();
+            while (it.hasNext()) {
+                VisitDO visitDO = it.next();
+                if (visitDO.getPageFlag() == null) {
+                    it.remove();
+                    continue;
+                }
+                if (visitDO.getPageFlag().equals(flag)) {
+                    visitDO.setVsCt(visitDO.getVsCt() + 1);
+                    return DBHelper.saveKV(visitCTKey, visitDOs);
+                }
             }
-            visitDO.setVsCt(visitDO.getVsCt() + 1);
+            VisitDO visitDO = buildVisitDO(flag, ip);
+            visitDOArr.add(visitDO);
             return DBHelper.saveKV(visitCTKey, visitDOs);
+
         }
 
     }
