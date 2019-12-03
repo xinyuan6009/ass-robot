@@ -32,5 +32,6 @@
             <groupId>com.xinyuan.daily</groupId>
             <artifactId>daily-util</artifactId>
         </dependency>
+
     </dependencies>
 </project>
