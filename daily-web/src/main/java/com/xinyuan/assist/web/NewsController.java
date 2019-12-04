@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.xinyuan.assist.comm.dingtalk.DtResponse;
+import com.xinyuan.assist.comm.dingtalk.NewsResp;
 import com.xinyuan.assist.service.msg.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,9 +21,19 @@ public class NewsController {
     @RequestMapping("/get")
     @ResponseBody
     public DtResponse get() {
-        String news = newsService.generateNews();
+        NewsResp newsObj = newsService.generateNewsText();
         Map<String, String> fields = new HashMap<>();
-        fields.put("news", news);
+        fields.put("news", newsObj.getNews());
+        fields.put("image", newsObj.getImage());
+        fields.put("publishTime", newsObj.getPublishTime());
+        return DtResponse.success(fields);
+    }
+
+    @RequestMapping("/push")
+    @ResponseBody
+    public DtResponse push() {
+        newsService.push();
+        Map<String, String> fields = new HashMap<>();
         return DtResponse.success(fields);
     }
 }

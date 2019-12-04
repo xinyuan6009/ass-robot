@@ -4,11 +4,13 @@
  */
 package com.xinyuan.assist.service.msg;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import com.alibaba.fastjson.JSON;
 
+import com.xinyuan.assist.comm.dingtalk.NewsResp;
 import com.xinyuan.assist.service.PushCallback;
 import com.xinyuan.assist.service.api.ApiResult;
 import com.xinyuan.assist.service.api.news.NewsApiService;
@@ -47,7 +49,16 @@ public class NewsServiceImpl extends MsgAbstractService implements NewsService {
     private NewsApiService newsApiService;
 
     @Override
-    public String generateNews() {
+    public NewsResp generateNewsText() {
+        ApiResult<List<WyNewData>> result = newsApiService.call();
+        if (result == null || result.getCode() != 200) {
+            return new NewsResp();
+        }
+        return parseNews(result.getResult());
+    }
+
+    @Override
+    public String generateNewsMarkdown() {
         String content = FileUtil.readFileFromResource(NEWS_TEMPLATE_PATH);
         ApiResult<List<WyNewData>> result = newsApiService.call();
         if (result == null || result.getCode() != 200) {
@@ -73,10 +84,34 @@ public class NewsServiceImpl extends MsgAbstractService implements NewsService {
 
             @Override
             public String generateMsg() {
-                return generateNews();
+                return generateNewsMarkdown();
             }
         });
         return false;
+    }
+
+    /**
+     * 解析新闻数据并填充Markdown内容
+     *
+     * @return
+     */
+    protected NewsResp parseNews(List<WyNewData> datas) {
+        StringBuilder sb = new StringBuilder();
+        String newsImage = newsDefaultImage;
+        NewsResp resp = new NewsResp();
+        for (int i = 0; i < 10; i++) {
+            WyNewData tt = datas.get(i);
+            newsImage = tt.getImage();
+            String newsInfo = String.format("> [%s](%s)", tt.getTitle(), tt.getPath());
+            sb.append(newsInfo)
+                    .append(System.lineSeparator())
+                    .append(System.lineSeparator());
+        }
+        resp.setImage(newsImage);
+        resp.setNews(sb.toString());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        resp.setPublishTime(sdf.format(new Date()));
+        return resp;
     }
 
     /**
@@ -88,7 +123,7 @@ public class NewsServiceImpl extends MsgAbstractService implements NewsService {
     protected String parseNewsDataAndFillUpMarkdown(String content, List<WyNewData> datas) {
         StringBuilder sb = new StringBuilder();
         String newsImage = newsDefaultImage;
-        for (int i =0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             WyNewData tt = datas.get(i);
             newsImage = tt.getImage();
             String newsInfo = String.format("> [%s](%s)", tt.getTitle(), tt.getPath());

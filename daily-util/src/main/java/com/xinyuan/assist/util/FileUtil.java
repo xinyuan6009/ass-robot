@@ -23,67 +23,36 @@ public class FileUtil {
      * @return
      */
     public static String readFileFromResource(String resourcePath) {
+        InputStream is = null;
+        BufferedReader rd = null;
         try {
-            InputStream is = FileUtil.class.getClassLoader().getResourceAsStream(resourcePath);
-            BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-
+            is = FileUtil.class.getClassLoader().getResourceAsStream(resourcePath);
+            rd = new BufferedReader(new InputStreamReader(is, "UTF-8"));
             StringBuffer buffer = new StringBuffer();
             String line = "";
             while ((line = rd.readLine()) != null) {
-                buffer.append(line);
+                buffer.append(System.lineSeparator() + line);
             }
             return buffer.toString();
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (rd != null) {
+                try {
+                    rd.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return "";
     }
 
-    /**
-     * 转换文件内容为字符串
-     *
-     * @param file
-     * @return
-     */
-    public static String text2String(File file) {
-        StringBuilder sb = new StringBuilder();
-        BufferedReader reader = null;
-        InputStreamReader read = null;
-        FileInputStream fi = null;
-        try {
-            fi = new FileInputStream(file);
-            read = new InputStreamReader(
-                    fi, "utf-8");
-            reader = new BufferedReader(read);
-            String s;
-            while ((s = reader.readLine()) != null) {
-                sb.append(System.lineSeparator() + s);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (fi != null) {
-                try {
-                    fi.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (read != null) {
-                try {
-                    read.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return sb.toString();
-    }
 }
