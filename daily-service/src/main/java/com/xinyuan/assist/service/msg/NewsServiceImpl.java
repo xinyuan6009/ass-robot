@@ -23,11 +23,11 @@ import org.springframework.stereotype.Service;
 
 /**
  * @author melonkid
- * @version $Id: NewServiceImpl.java, v 0.1 2019年12月03日 17:27 melonkid Exp $
+ * @version $Id: NewsServiceImpl.java, v 0.1 2019年12月03日 17:27 melonkid Exp $
  */
 @Service
 @PropertySource("classpath:application.properties")
-public class NewServiceImpl extends MsgAbstractService implements NewService {
+public class NewsServiceImpl extends MsgAbstractService implements NewsService {
 
     @Value("${dingtalk.news.secret}")
     private String secrets;

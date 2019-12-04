@@ -1,1 +1,2 @@
-scp daily-start/target/daily-start-0.0.1-SNAPSHOT.jar admin@39.106.115.98:~/workspace
+PROGRAM_NAME="daily-notes"
+scp daily-start/target/$PROGRAM_NAME.jar admin@39.106.115.98:~/workspace

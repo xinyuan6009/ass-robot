@@ -1,6 +1,6 @@
 package com.xinyuan.assist.web;
 
-import com.xinyuan.assist.service.msg.NewService;
+import com.xinyuan.assist.service.msg.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TestController {
 
     @Autowired
-    private NewService newService;
+    private NewsService newsService;
 
     @RequestMapping("/news")
     public String news(){
-        newService.push();
+        newsService.push();
         return "/index.html";
     }
 }

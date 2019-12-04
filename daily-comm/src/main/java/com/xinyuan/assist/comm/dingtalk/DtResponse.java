@@ -8,6 +8,7 @@ import java.util.Map;
 
 /**
  * 响应钉钉
+ *
  * @author melonkid
  * @version $Id: DtResponse.java, v 0.1 2019年12月03日 20:34 melonkid Exp $
  */
@@ -21,11 +22,11 @@ public class DtResponse {
 
     private Map<String, String> fields;
 
-
-    public static DtResponse success(Map<String, String> fields){
+    public static DtResponse success(Map<String, String> fields) {
         DtResponse dtResponse = new DtResponse();
         dtResponse.success = Boolean.TRUE;
         dtResponse.fields = fields;
+        dtResponse.errorCode = "200";
         return dtResponse;
     }
 

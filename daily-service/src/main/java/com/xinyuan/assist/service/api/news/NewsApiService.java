@@ -7,6 +7,8 @@ import com.alibaba.fastjson.TypeReference;
 
 import com.xinyuan.assist.service.api.ApiResult;
 import com.xinyuan.assist.util.HttpUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
@@ -19,6 +21,11 @@ import org.springframework.stereotype.Component;
 public class NewsApiService {
 
     /**
+     * LOG
+     */
+    private Logger logger = LoggerFactory.getLogger(NewsApiService.class);
+
+    /**
      * 远程调用新闻API
      *
      * @return
@@ -26,6 +33,7 @@ public class NewsApiService {
     public ApiResult<List<WyNewData>> call() {
         String url = "https://api.apiopen.top/getWangYiNews";
         String result = HttpUtil.doGet(url);
+        logger.info("ret:{}", result);
         return JSON.parseObject(result, new TypeReference<ApiResult<List<WyNewData>>>() {});
     }
 
