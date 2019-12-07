@@ -1,8 +1,8 @@
 /**
- * Alipay.com Inc.
+ * MelonKid.
  * Copyright (c) 2004-2019 All Rights Reserved.
  */
-package com.xinyuan.assist.service.msg;
+package com.xinyuan.assist.service.msg.news;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,6 +15,8 @@ import com.xinyuan.assist.service.PushCallback;
 import com.xinyuan.assist.service.api.ApiResult;
 import com.xinyuan.assist.service.api.news.NewsApiService;
 import com.xinyuan.assist.service.api.news.WyNewData;
+import com.xinyuan.assist.service.msg.MarkdownParser;
+import com.xinyuan.assist.service.msg.MsgAbstractService;
 import com.xinyuan.assist.service.secret.DtRobotSignUtil;
 import com.xinyuan.assist.util.FileUtil;
 import org.apache.http.client.utils.DateUtils;

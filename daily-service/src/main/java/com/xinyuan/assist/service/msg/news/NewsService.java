@@ -1,8 +1,8 @@
 /**
- * Alipay.com Inc.
+ * MelonKid.
  * Copyright (c) 2004-2019 All Rights Reserved.
  */
-package com.xinyuan.assist.service.msg;
+package com.xinyuan.assist.service.msg.news;
 
 import com.xinyuan.assist.comm.dingtalk.NewsResp;
 

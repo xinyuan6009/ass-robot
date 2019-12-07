@@ -33,5 +33,9 @@
             <artifactId>daily-util</artifactId>
         </dependency>
 
+        <!--<dependency>-->
+            <!--<groupId>com.geccocrawler</groupId>-->
+            <!--<artifactId>gecco</artifactId>-->
+        <!--</dependency>-->
     </dependencies>
 </project>

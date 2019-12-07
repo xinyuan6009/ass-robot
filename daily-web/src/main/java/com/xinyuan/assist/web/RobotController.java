@@ -6,34 +6,26 @@ import java.util.Map;
 import com.xinyuan.assist.comm.dingtalk.DtResponse;
 import com.xinyuan.assist.comm.dingtalk.NewsResp;
 import com.xinyuan.assist.service.msg.news.NewsService;
+import com.xinyuan.assist.service.robot.MoliService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/news")
-public class NewsController {
+@RequestMapping("/robot")
+public class RobotController {
 
     @Autowired
-    private NewsService newsService;
+    private MoliService moliService;
 
-    @RequestMapping("/get")
+    @RequestMapping("/moli/ask")
     @ResponseBody
-    public DtResponse get() {
-        NewsResp newsObj = newsService.generateNewsText();
+    public DtResponse ask(String question) {
+        String answer = moliService.ask(question);
         Map<String, String> fields = new HashMap<>();
-        fields.put("news", newsObj.getNews());
-        fields.put("image", newsObj.getImage());
-        fields.put("publishTime", newsObj.getPublishTime());
+        fields.put("answer", answer);
         return DtResponse.success(fields);
     }
 
-    @RequestMapping("/push")
-    @ResponseBody
-    public DtResponse push() {
-        newsService.push();
-        Map<String, String> fields = new HashMap<>();
-        return DtResponse.success(fields);
-    }
 }
