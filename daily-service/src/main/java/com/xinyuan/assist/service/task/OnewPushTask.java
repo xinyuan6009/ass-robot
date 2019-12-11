@@ -4,8 +4,9 @@
  */
 package com.xinyuan.assist.service.task;
 
-import com.xinyuan.assist.service.msg.news.NewsService;
+import com.xinyuan.assist.service.msg.onew.OnewService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,13 +14,13 @@ import org.springframework.stereotype.Component;
  * @version $Id: NewsPushTask.java, v 0.1 2019年12月04日 10:23 melonkid Exp $
  */
 @Component
-public class NewsPushTask {
+public class OnewPushTask {
 
     @Autowired
-    private NewsService newsService;
+    private OnewService onewService;
 
-    //@Scheduled(cron = "${job.dingtalk.news.schedule}")
+    @Scheduled(cron = "${job.dingtalk.news.schedule}")
     public void push(){
-        newsService.push();
+        onewService.push();
     }
 }

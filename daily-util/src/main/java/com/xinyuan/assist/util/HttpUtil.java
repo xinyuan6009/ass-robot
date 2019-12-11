@@ -77,10 +77,8 @@ public class HttpUtil {
             HttpGet httpGet = new HttpGet(uri);
             httpGet.setHeader("Content-Type", "application/json;charset=utf-8");
             reponse = httpClient.execute(httpGet);
-            System.out.println(reponse.getStatusLine().getStatusCode() + "\n");
             HttpEntity httpEntity = reponse.getEntity();
             result = EntityUtils.toString(httpEntity, "UTF-8");
-            System.out.println(result);
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
