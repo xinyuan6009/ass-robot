@@ -10,6 +10,7 @@ import com.xinyuan.assist.util.HttpUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * 天气服务类
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Component;
  * @author liangyh
  * @date 2018/7/25
  */
-@Component
+@Service
 public class NewsApiService {
 
     /**
