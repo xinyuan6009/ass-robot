@@ -6,6 +6,7 @@ package com.xinyuan.assist.service.task;
 
 import com.xinyuan.assist.service.msg.news.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,7 +19,7 @@ public class NewsPushTask {
     @Autowired
     private NewsService newsService;
 
-    //@Scheduled(cron = "${job.dingtalk.news.schedule}")
+    @Scheduled(cron = "${job.dingtalk.news.schedule}")
     public void push(){
         newsService.push();
     }

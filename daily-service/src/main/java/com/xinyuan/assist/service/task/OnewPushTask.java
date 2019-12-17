@@ -34,7 +34,7 @@ public class OnewPushTask {
     /**
      * 每日一言
      */
-    @Scheduled(cron = "${job.dingtalk.news.schedule}")
+    @Scheduled(cron = "${job.dingtalk.onewd.schedule}")
     public void pushSentence() {
         onewService.push();
     }
