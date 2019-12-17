@@ -6,21 +6,47 @@ import org.mapdb.DB;
 import org.mapdb.DBMaker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
+@Repository
+@PropertySource("classpath:application.properties")
 public class DBHelper {
 
-    private static String DB_FILE_NAME = "daily.db";
+    /**
+     * 数据库
+     */
+    private DB db;
+
+    @Value("${db.filepath}")
+    private String dbFile;
 
     private static String DB_VISIT_CNT = "visitCnt";
 
     private static Logger logger = LoggerFactory.getLogger(DBHelper.class);
 
-    public static boolean saveKV(String key, Object val) {
+    @PostConstruct
+    private void init() {
+        db = DBMaker.fileDB(dbFile)
+                //.checksumHeaderBypass()
+                .fileMmapEnableIfSupported()//1
+                .fileMmapPreclearDisable()//2
+                .cleanerHackEnable()//3
+                .closeOnJvmShutdown()//4
+                .transactionEnable()//5
+                .concurrencyScale(128)//6
+                .make();
+    }
+
+    public boolean saveKV(String key, Object val) {
         try {
-            DB db = DBMaker.fileDB(DB_FILE_NAME).make();
             ConcurrentMap map = db.hashMap(DB_VISIT_CNT).createOrOpen();
             map.put(key, val);
-            db.close();
             return true;
         } catch (Exception e) {
             logger.error("", e);
@@ -28,12 +54,10 @@ public class DBHelper {
         return false;
     }
 
-    public static Object getByK(String key) {
+    public Object getByK(String key) {
         try {
-            DB db = DBMaker.fileDB(DB_FILE_NAME).make();
             ConcurrentMap map = db.hashMap(DB_VISIT_CNT).createOrOpen();
             Object val = map.get(key);
-            db.close();
             return val;
         } catch (Exception e) {
             logger.error("", e);
@@ -41,8 +65,19 @@ public class DBHelper {
         return null;
     }
 
-    public static void main(String[] args) {
-        saveKV("hello", "word");
-        System.out.println(getByK("hello"));
+
+    @PreDestroy
+    public void destory() {
+        db.close();
     }
+
+
+    public String getDbFile() {
+        return dbFile;
+    }
+
+    public void setDbFile(String dbFile) {
+        this.dbFile = dbFile;
+    }
+
 }

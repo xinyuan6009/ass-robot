@@ -13,4 +13,6 @@ public interface OnewService {
     String generateMsgMarkdown();
 
     boolean push();
+
+
 }

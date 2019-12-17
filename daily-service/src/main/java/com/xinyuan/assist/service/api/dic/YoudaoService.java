@@ -18,7 +18,7 @@ import java.util.List;
 @PropertySource("classpath:application.properties")
 public class YoudaoService {
 
-    @Value("dic.youdao")
+    @Value("${dic.youdao}")
     private String serviceUrl;
 
     private String generateUrl(String word) {

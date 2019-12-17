@@ -9,38 +9,42 @@ import java.util.Map;
 import com.xinyuan.assist.dao.DBHelper;
 import com.xinyuan.assist.dao.VisitDO;
 import com.xinyuan.assist.service.VisiterService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 @Service
 public class VisiterServiceImpl implements VisiterService {
 
+    @Autowired
+    private DBHelper dbHelper;
+
     private String visitCTKey = "visitCNTKey";
 
     @Override
     public void visitCtLog() {
         synchronized (VisiterServiceImpl.class) {
-            Object cnt = DBHelper.getByK(visitCTKey);
+            Object cnt = dbHelper.getByK(visitCTKey);
             if (cnt == null) {
                 cnt = 1;
-                DBHelper.saveKV(visitCTKey, cnt);
+                dbHelper.saveKV(visitCTKey, cnt);
             }
             cnt = (int)cnt + 1;
-            DBHelper.saveKV(visitCTKey, cnt);
+            dbHelper.saveKV(visitCTKey, cnt);
         }
     }
 
     @Override
     public boolean visitCtLog(String flag, String ip) {
         synchronized (VisiterServiceImpl.class) {
-            Map<String, List<VisitDO>> visitDOs = (HashMap<String, List<VisitDO>>)DBHelper.getByK(visitCTKey);
+            Map<String, List<VisitDO>> visitDOs = (HashMap<String, List<VisitDO>>)dbHelper.getByK(visitCTKey);
             if (CollectionUtils.isEmpty(visitDOs)) {
                 visitDOs = new HashMap<>();
                 List<VisitDO> visitDOArr = new ArrayList<>();
                 VisitDO visitDO = buildVisitDO(flag, ip);
                 visitDOArr.add(visitDO);
                 visitDOs.put(ip, visitDOArr);
-                return DBHelper.saveKV(visitCTKey, visitDOs);
+                return dbHelper.saveKV(visitCTKey, visitDOs);
             }
             List<VisitDO> visitDOArr = visitDOs.get(ip);
             if (CollectionUtils.isEmpty(visitDOArr)) {
@@ -48,7 +52,7 @@ public class VisiterServiceImpl implements VisiterService {
                 VisitDO visitDO = buildVisitDO(flag, ip);
                 visitDOArr.add(visitDO);
                 visitDOs.put(ip, visitDOArr);
-                return DBHelper.saveKV(visitCTKey, visitDOs);
+                return dbHelper.saveKV(visitCTKey, visitDOs);
             }
             Iterator<VisitDO> it = visitDOArr.iterator();
             while (it.hasNext()) {
@@ -59,12 +63,12 @@ public class VisiterServiceImpl implements VisiterService {
                 }
                 if (visitDO.getPageFlag().equals(flag)) {
                     visitDO.setVsCt(visitDO.getVsCt() + 1);
-                    return DBHelper.saveKV(visitCTKey, visitDOs);
+                    return dbHelper.saveKV(visitCTKey, visitDOs);
                 }
             }
             VisitDO visitDO = buildVisitDO(flag, ip);
             visitDOArr.add(visitDO);
-            return DBHelper.saveKV(visitCTKey, visitDOs);
+            return dbHelper.saveKV(visitCTKey, visitDOs);
 
         }
 
@@ -80,6 +84,6 @@ public class VisiterServiceImpl implements VisiterService {
 
     @Override
     public Map<String, VisitDO> getVisitCt() {
-        return (Map<String, VisitDO>)DBHelper.getByK(visitCTKey);
+        return (Map<String, VisitDO>)dbHelper.getByK(visitCTKey);
     }
 }
