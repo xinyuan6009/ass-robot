@@ -5,16 +5,13 @@
 package com.xinyuan.assist.service.msg.onew;
 
 import com.alibaba.fastjson.JSON;
-
 import com.xinyuan.assist.service.PushCallback;
 import com.xinyuan.assist.service.api.onew.CibaOwRet;
 import com.xinyuan.assist.service.api.onew.CibaService;
 import com.xinyuan.assist.service.msg.MarkdownParser;
 import com.xinyuan.assist.service.msg.MsgAbstractService;
-import com.xinyuan.assist.service.secret.DtRobotSignUtil;
 import com.xinyuan.assist.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
@@ -29,11 +26,6 @@ public class OnewServiceImpl extends MsgAbstractService implements OnewService {
     @Autowired
     private CibaService cibaService;
 
-    @Value("${dingtalk.news.secret}")
-    private String secrets;
-
-    @Value("${dingtalk.news.webhook}")
-    private String baseUrls;
 
     /**
      * 一言模板路径
@@ -52,14 +44,7 @@ public class OnewServiceImpl extends MsgAbstractService implements OnewService {
         pushTemplate.process(new PushCallback() {
             @Override
             public String[] generatePushUrls() {
-                String[] urlArr = baseUrls.split(",");
-                String[] secretArr = secrets.split(",");
-                String[] pushUrls = new String[urlArr.length];
-                for (int i = 0; i < urlArr.length; i++) {
-                    String pushUrl = DtRobotSignUtil.generateCurr(urlArr[i], secretArr[i]);
-                    pushUrls[i] = pushUrl;
-                }
-                return pushUrls;
+                return generateUrls();
             }
 
             @Override

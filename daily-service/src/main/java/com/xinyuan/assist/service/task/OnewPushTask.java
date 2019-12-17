@@ -5,6 +5,7 @@
 package com.xinyuan.assist.service.task;
 
 import com.xinyuan.assist.service.msg.onew.OnewService;
+import com.xinyuan.assist.service.msg.onew.OnewordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -19,8 +20,24 @@ public class OnewPushTask {
     @Autowired
     private OnewService onewService;
 
+    @Autowired
+    private OnewordService onewordService;
+
+    /**
+     * 每日一词
+     */
+    @Scheduled(cron = "${job.dingtalk.oneword.schedule}")
+    public void pushWord() {
+        onewordService.push();
+    }
+
+    /**
+     * 每日一言
+     */
     @Scheduled(cron = "${job.dingtalk.news.schedule}")
-    public void push(){
+    public void pushSentence() {
         onewService.push();
     }
+
+
 }

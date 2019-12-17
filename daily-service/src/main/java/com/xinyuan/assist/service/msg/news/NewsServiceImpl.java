@@ -17,7 +17,6 @@ import com.xinyuan.assist.service.api.news.NewsApiService;
 import com.xinyuan.assist.service.api.news.WyNewData;
 import com.xinyuan.assist.service.msg.MarkdownParser;
 import com.xinyuan.assist.service.msg.MsgAbstractService;
-import com.xinyuan.assist.service.secret.DtRobotSignUtil;
 import com.xinyuan.assist.util.FileUtil;
 import org.apache.http.client.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +31,6 @@ import org.springframework.stereotype.Service;
 @Service
 @PropertySource("classpath:application.properties")
 public class NewsServiceImpl extends MsgAbstractService implements NewsService {
-
-    @Value("${dingtalk.news.secret}")
-    private String secrets;
-
-    @Value("${dingtalk.news.webhook}")
-    private String baseUrls;
 
     @Value("${news.default.image}")
     private String newsDefaultImage;
@@ -74,14 +67,7 @@ public class NewsServiceImpl extends MsgAbstractService implements NewsService {
         pushTemplate.process(new PushCallback() {
             @Override
             public String[] generatePushUrls() {
-                String[] urlArr = baseUrls.split(",");
-                String[] secretArr = secrets.split(",");
-                String[] pushUrls = new String[urlArr.length];
-                for (int i = 0; i < urlArr.length; i++) {
-                    String pushUrl = DtRobotSignUtil.generateCurr(urlArr[i], secretArr[i]);
-                    pushUrls[i] = pushUrl;
-                }
-                return pushUrls;
+                return generateUrls();
             }
 
             @Override

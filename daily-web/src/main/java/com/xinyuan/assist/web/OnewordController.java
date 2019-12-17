@@ -7,6 +7,7 @@ import com.xinyuan.assist.service.api.dic.YoudaoService;
 import com.xinyuan.assist.service.api.onew.CibaOwRet;
 import com.xinyuan.assist.service.api.onew.CibaService;
 import com.xinyuan.assist.service.msg.onew.OnewService;
+import com.xinyuan.assist.service.msg.onew.OnewordService;
 import com.xinyuan.assist.service.study.EnglishService;
 import com.xinyuan.assist.util.ReflectUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +28,8 @@ public class OnewordController {
     @Autowired
     private OnewService onewService;
 
-
     @Autowired
-    private EnglishService englishService;
-
-    @Autowired
-    private YoudaoService youdaoService;
+    private OnewordService onewordService;
 
 
     @RequestMapping("/get")
@@ -43,15 +40,6 @@ public class OnewordController {
         return DtResponse.success(fields);
     }
 
-    @RequestMapping("/getWd")
-    @ResponseBody
-    public DtResponse getWd() {
-        String ret = englishService.randomAWord();
-        TranModel trans = youdaoService.queryHTML(ret);
-        Map<String, String> fields = new HashMap<>();
-        fields.put("v", JSON.toJSONString(trans));
-        return DtResponse.success(fields);
-    }
 
     @RequestMapping("/push")
     @ResponseBody
@@ -60,4 +48,10 @@ public class OnewordController {
         return DtResponse.success(null);
     }
 
+    @RequestMapping("/push1")
+    @ResponseBody
+    public DtResponse push1() {
+        onewordService.push();
+        return DtResponse.success(null);
+    }
 }

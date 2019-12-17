@@ -1,7 +1,5 @@
 package com.xinyuan.assist.dao;
 
-import java.util.concurrent.ConcurrentMap;
-
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 import org.slf4j.Logger;
@@ -9,10 +7,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import java.util.concurrent.ConcurrentMap;
 
 @Repository
 @PropertySource("classpath:application.properties")
